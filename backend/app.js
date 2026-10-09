@@ -33,7 +33,7 @@ app.get('/api/oneproduct', (req, res) => {
 });
 
 app.get('/api/products', (req, res) => {
-  fetch('https://dummyjson.com/products')
+  fetch('https://dummyjson.com/products?limit=0')
     .then(response => response.json())
     .then((data) => {
       const products = data.products.map(product => ({
