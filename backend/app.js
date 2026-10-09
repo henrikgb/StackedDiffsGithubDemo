@@ -32,6 +32,25 @@ app.get('/api/oneproduct', (req, res) => {
     });
 });
 
+app.get('/api/products', (req, res) => {
+  fetch('https://dummyjson.com/products')
+    .then(response => response.json())
+    .then((data) => {
+      const products = data.products.map(product => ({
+        id: product.id,
+        name: product.title,
+        price: product.price,
+        category: product.category,
+        imageUrl: product.thumbnail,
+        inStock: product.stock > 0
+      }));
+      res.json(products);
+    })
+    .catch(error => {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ error: 'Failed to fetch products' });
+    });
+});
     
 
 app.listen(PORT, () => {
